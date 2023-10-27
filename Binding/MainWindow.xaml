@@ -1,0 +1,74 @@
+﻿<Window x:Class="Binding.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Binding"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="605" Width="800">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width = "250"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <StackPanel Grid.Column="0" VerticalAlignment="Top" Margin="10">
+
+            <Label FontStyle="Italic" Content="Размер шрифта"/>
+            <Slider Name="fontSlider" Minimum="10" Maximum="32" TickFrequency="1" IsSnapToTickEnabled="True" Value="14" ValueChanged ="fontSlider_ValueChanged"/>
+
+
+
+            <Label FontStyle="Italic" Content="Начертание"/>
+            <RadioButton Name="normalRatioButton" Content="Нормальный" Checked="RatioButtonNormal_Checked" GroupName="Nachertanie" />
+            <RadioButton Name="italicRatioButton" Content="Наклонный"  Checked="RatioButtonNaklon_Checked" GroupName="Nachertanie"/>
+
+            <Label FontStyle="Italic" Content="Вес"/>
+            <RadioButton Name="tonkWeightlRatioButton" Content="Тонкий" Checked="RatioButtonThin_Checked" GroupName="Ves"  />
+            <RadioButton Name="normalWeightlRatioButton" Content="Нормальный" Checked="RatioButtonNormals_Checked" GroupName="Ves"  />
+            <RadioButton Name="boldWeightlRatioButton" Content="Жирный" Checked="RatioButtonBold_Checked" GroupName="Ves"  />
+
+            <Label FontStyle="Italic" Content="Шрифт"/>
+            <ComboBox x:Name="fontFamilyComboBox" SelectionChanged="fontFamilyComboBox_SelectionChanged"/>
+            <Label FontStyle="Italic" Content="Цвет текста"/>
+            <ComboBox Name="foregroundComboBox" SelectionChanged="foregroundComboBox_SelectionChanged"/>
+            <Label FontStyle="Italic" Content="Цвет заливки"/>
+            <ComboBox x:Name="backgroundComboBox" SelectionChanged="backgroundComboBox_SelectionChanged"/>
+            <Label FontStyle="Italic" Content="Выравнивание"/>
+            <ComboBox Name="textAlignmentComboBox" SelectionChanged="textAlignmentComboBox_SelectionChanged"/>
+
+
+
+            <Label FontStyle="Italic" Content="Цвет рамки"/>
+            <ComboBox Name="frameColorComboBox" SelectionChanged="frameColorComboBox_SelectionChanged"/>
+
+            <Label FontStyle="Italic">Толщина рамки</Label>
+            <Slider Name="TolSlider" Maximum="20" Minimum="1"/>
+
+            <Label FontStyle="Italic">Скругление углов</Label>
+            <Slider Name="SkrugSlider" Maximum="40" Minimum="1"/>
+
+            <Label FontStyle="Italic">Отступ</Label>
+            <Slider Name="OtsSlider" Maximum="150" Minimum="0"/>
+
+
+        </StackPanel>
+
+        <Border Grid.Column="1" BorderThickness="{Binding ElementName=TolSlider, Path=Value}" BorderBrush="{Binding ElementName=frameColorComboBox, Path=SelectedValue}" CornerRadius="{Binding ElementName=SkrugSlider, Path=Value}" Margin="10" Padding="10">
+
+
+            <TextBox Name="textBox" BorderThickness="0" TextWrapping="Wrap"
+                  TextAlignment="{Binding ElementName=textAlignmentComboBox, Path=SelectedItem}"
+                  FontSize="{Binding ElementName=fontSlider, Path=Value}"
+                 Background="{Binding ElementName=backgroundComboBox, Path=SelectedValue}"
+                  Foreground="{Binding ElementName=foregroundComboBox, Path=SelectedValue}"
+                  FontFamily="{Binding ElementName=fontFamilyComboBox, Path=SelectedValue}" Margin="-10"
+                     Padding="{Binding ElementName=OtsSlider, Path=Value}">
+
+
+            </TextBox>
+
+
+        </Border>
+    </Grid>
+</Window>
